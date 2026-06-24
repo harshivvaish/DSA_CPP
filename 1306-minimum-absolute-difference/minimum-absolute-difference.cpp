@@ -27,7 +27,10 @@ public:
         int n= arr.size();
         int min_diff=INT_MAX;
         for(int i=1; i<n; i++){
-            min_diff= min(min_diff, (arr[i]-arr[i-1]));
+            int temp = arr[i]-arr[i-1];
+            if(temp<min_diff){
+                min_diff=temp;
+            }
         }
         vector<vector<int>> ans;
         for(int i=1; i<n; i++){
