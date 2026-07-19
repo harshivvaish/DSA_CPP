@@ -2,27 +2,30 @@ class Solution {
 public:
     string smallestSubsequence(string s) {
         int count[26] = {0};
-        bool visited[26] = {false};
+        unsigned int visited = 0;
 
         for (char c : s) {
             count[c - 'a']++;
         }
 
         string result = "";
+        result.reserve(26);
+
         for (char c : s) {
+            int idx = c - 'a';
+            count[idx]--;
 
-            count[c - 'a']--;
-
-            if (visited[c - 'a']) {
+            if ((visited >> idx) & 1) {
                 continue;
             }
+
             while (!result.empty() && result.back() > c && count[result.back() - 'a'] > 0) {
-                visited[result.back() - 'a'] = false;
+                visited &= ~(1 << (result.back() - 'a'));
                 result.pop_back();
             }
 
             result.push_back(c);
-            visited[c - 'a'] = true;
+            visited |= (1 << idx);
         }
 
         return result;
