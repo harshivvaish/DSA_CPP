@@ -14,9 +14,7 @@ public:
 
         //exclude
         int idx=i+1;
-        while(idx<nums.size() && nums[idx]==nums[idx-1]){
-            idx++;
-        }
+        while(idx<nums.size() && nums[idx]==nums[idx-1]) idx++;
         powerset(nums, ans, idx, fs);
         
     }
